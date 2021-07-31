@@ -106,5 +106,26 @@ namespace MVCLibroteca.Controllers
             return View("Views/Admin/Libros/List.cshtml", listaLibros.Where(libro => libro.estatus == true));
 
         }
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var libroUpd = await contexto.Libros.FirstOrDefaultAsync(l => l.idLibro == id);
+            if (libroUpd == null)
+            {
+                return NotFound();
+            }
+
+            List<Autores> autores = contexto.Autores.ToList().Where(autor => autor.estatus == true).ToList();
+            ViewData["autores"] = autores.Select(autor => new SelectListItem
+            {
+                Text = autor.nombre + " " + autor.aPaterno + " " + autor.aMaterno,
+                Value = autor.idAutor.ToString()
+            });
+
+            return View("Views/Admin/Libros/Edit.cshtml", libroUpd);
+        }
     }
 }

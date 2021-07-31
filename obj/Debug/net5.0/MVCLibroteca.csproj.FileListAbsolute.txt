@@ -64,3 +64,4 @@
 /Users/mariareina/Desarrollo/FDW_6A_DZ/MVCLibroteca/obj/Debug/net5.0/Razor/Views/Home/Login.cshtml.g.cs
 /Users/mariareina/Desarrollo/FDW_6A_DZ/MVCLibroteca/obj/Debug/net5.0/Razor/Views/Home/AccessDenied.cshtml.g.cs
 /Users/mariareina/Desarrollo/FDW_6A_DZ/MVCLibroteca/obj/Debug/net5.0/Razor/Views/Admin/Libros/List.cshtml.g.cs
+/Users/mariareina/Desarrollo/FDW_6A_DZ/MVCLibroteca/obj/Debug/net5.0/Razor/Views/Admin/Libros/Edit.cshtml.g.cs

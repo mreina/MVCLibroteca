@@ -49,7 +49,8 @@
                         @Html.DisplayFor(modelItem => libro.stock)
                     </td>
                     <td>
-                        <a class="btn btn-info">Actualizar</a>
+                        <a class="btn btn-info" asp-controller="Libros" asp-action="Edit"
+                        asp-route-id="@libro.idLibro">Actualizar</a>
                         <a class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>

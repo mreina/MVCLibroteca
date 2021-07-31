@@ -1,0 +1,144 @@
+﻿@model Libros
+@{
+    ViewData["Title"] = "Libros";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="text-center">
+    <h1 class="display-4"> Editar libro</h1>
+</div>
+<div>
+    @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+</div>
+<div class="container">
+    <form class="needs-validation" novalidate method="POST" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label for="inputTitulo">Título:</label>
+            <input asp-for="titulo" type="text" class="form-control" id="inputTitulo"
+                placeholder="Introduce el título del libro" required>
+            <div class="valid-feedback">
+                Dato ingresado correctamente!
+            </div>
+            <div class="invalid-feedback">
+                El nombre es obligatorio.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputAutor">Autor del libro:</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputAutor">Autores</label>
+                </div>
+                @Html.DropDownList("idAutor", (IEnumerable
+                <SelectListItem>)ViewData["autores"], new {@class="form-control"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputISBN">ISBN:</label>
+            <input asp-for="ISBN" type="text" class="form-control" id="inputISBN" placeholder="Introduce el ISBN"
+                required>
+            <div class="valid-feedback">
+                Dato ingresado correctamente!
+            </div>
+            <div class="invalid-feedback">
+                El ISBN es obligatorio.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputEditorial">Editorial:</label>
+            <input asp-for="Editorial" type="text" class="form-control" id="inputEditorial"
+                placeholder="Introduce la editorial">
+            <div class="valid-feedback">
+                Dato ingresado correctamente!
+            </div>
+            <div class="invalid-feedback">
+                La editorial es obligatorio.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputFechaPubli">Fecha de publicación:</label>
+            <input asp-for="fechaPublicacion" type="date" class="form-control" id="inputFechaPubli" required>
+            <div class="valid-feedback">
+                Dato ingresado correctamente!
+            </div>
+            <div class="invalid-feedback">
+                La fecha de publicación es obligatoria.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputPrecio">Precio:</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                </div>
+                <input type="number" id="inputPrecio" asp-for="precio" class="form-control"
+                    aria-label="Precio del libro">
+                <div class="input-group-append">
+                    <span class="input-group-text">.00</span>
+                </div>
+            </div>
+            <div class="valid-feedback">
+                Dato ingresado correctamente!
+            </div>
+            <div class="invalid-feedback">
+                El precio es obligatorio.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputStock">Stock:</label>
+            <input asp-for="stock" type="number" class="form-control" id="inputStock" required>
+            <div class="valid-feedback">
+                Dato ingresado correctamente!
+            </div>
+            <div class="invalid-feedback">
+                El Stock es obligatorio.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Portada del libro:</label>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customPortada" accept="image/*"
+                    onchange="loadFile(event)" asp-for="archivo">
+                <label class="custom-file-label" for="customPortada" data-browse="Buscar">Cambiar portada</label>
+            </div>
+            <div class="valid-feedback">
+                Dato ingresado correctamente!
+            </div>
+            <div class="invalid-feedback">
+                La portada es obligatoria.
+            </div>
+        </div>
+
+        @if (Model.portada != null)
+        {
+            <img id="preview" height="60" width="60" src="~/portadas/@Model.portada" />
+        }
+        else
+        {
+            <img id="preview" height="80" width="80" />
+        }
+        <hr>
+        <button type="submit" class="btn btn-primary">Editar</button>
+        <a class="btn btn-danger">Cancelar</a>
+    </form>
+</div>
+
+@section Scripts{
+<script>
+    var loadFile = function (event) {
+        var output = document.getElementById('preview');
+        output.src = URL.createObjectURL(event.target.files[0]); //Asignar a la vista previa
+        output.onload = function () {
+            URL.revokeObjectURL(output.src) // liberar memoria
+        }
+    };
+</script>
+}

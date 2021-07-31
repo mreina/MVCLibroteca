@@ -15704,6 +15704,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/mariareina/Desarrollo/FDW_6A_DZ/MVCLibroteca/Views/Admin/Libros/Edit.cshtml",
+      "TargetPath": "Views\\Admin\\Libros\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/mariareina/Desarrollo/FDW_6A_DZ/MVCLibroteca/Views/Admin/Autores/Delete.cshtml",
       "TargetPath": "Views\\Admin\\Autores\\Delete.cshtml",
       "FileKind": "mvc"
