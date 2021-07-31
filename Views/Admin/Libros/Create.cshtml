@@ -1,0 +1,109 @@
+@model Libros
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "Libros";
+}
+
+<div class="text-center">
+    <h1 class="display-4" Nuevo libro</h1>
+</div>
+<div>
+    @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+</div>
+<div class="container">
+
+    <form class="needs-validation" novalidate method="POST" enctype="multipart/form-data" asp-controller="Libros"
+        asp-action="Create">
+        <div class="form-group>">
+            <label for="inputTitulo">Título:</label>
+            <input asp-for="titulo" type="text" class="form-control" id="inputTitulo"
+                placeholder="Introduce el título del libro" required>
+            <div class="valid-feedback">
+                Dato ingresado correctamente!
+            </div>
+            <div class="invalid-feedback">
+                El nombre es obligatorio.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputAutores">Autor del libro:</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputAutor">Autores</label>
+                </div>
+                @Html.DropDownList("idAutor", (IEnumerable<SelectListItem>)ViewData["autores"], new
+                {@class="form-control"})
+            </div>
+        </div>
+        <div class="form-group>">
+            <label for="inputISBN">ISBN:</label>
+            <input asp-for="ISBN" type="text" class="form-control" id="inputISBN" placeholder="Introduce el ISBN"
+                required>
+            <div class="valid-feedback">
+                Dato ingresado correctamente!
+            </div>
+            <div class="invalid-feedback">
+                El apellido paterno es obligatorio.
+            </div>
+        </div>
+        <div class="form-group>">
+            <label for="inputEditorial">Editorial:</label>
+            <input asp-for="Editorial" type="text" class="form-control" id="inputEditorial"
+                placeholder="Introduce la editorial">
+            <div class="valid-feedback">
+                Dato ingresado correctamente!
+            </div>
+        </div>
+        <div class="form-group>">
+            <label for="inputFechaPubli">Fecha de publicación:</label>
+            <input asp-for="fechaPublicacion" type="date" class="form-control" id="inputFechaPubli" required>
+            <div class="valid-feedback">
+                Dato ingresado correctamente!
+            </div>
+            <div class="invalid-feedback">
+                La nacionalidad es obligatoria.
+            </div>
+        </div>
+        <div class="form-group>">
+            <label for="inputPrecio">Precio:</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                </div>
+                <input type="number" asp-for="precio" class="form-control" aria-label="Precio del libro">
+                <div class="input-group-append">
+                    <span class="input-group-text">.00</span>
+                </div>
+            </div>
+            <div class="valid-feedback">
+                Dato ingresado correctamente!
+            </div>
+            <div class="invalid-feedback">
+                El precio es obligatorio.
+            </div>
+        </div>
+        <div class="form-group>">
+            <label for="inputStock">Stock:</label>
+            <input asp-for="stock" type="number" class="form-control" id="inputStock" required>
+            <div class="valid-feedback">
+                Dato ingresado correctamente!
+            </div>
+            <div class="invalid-feedback">
+                El Stock es obligatorio.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPortada">Portada del libro:</label>
+            <div class="input-group mb-3">
+                <div class="custom-file">
+                    <input type="file" asp-for="archivo" class="custom-file-input" id="inputPortada">
+                    <label class="custom-file-label" for="inputPortada">Seleccionar</label>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-primary">Registrar</button>
+        <a class="btn btn-danger">Cancelar</a>
+    </form>
+</div>

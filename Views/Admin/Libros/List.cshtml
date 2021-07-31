@@ -1,0 +1,71 @@
+@model IEnumerable<Libros>
+@{
+    ViewData["Title"] = "Libros";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="d-flex justify-content-between align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Libros Disponibles</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Exportar</button>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <a class="btn btn-primary" asp-controller="Libros" asp-action="Create">Nuevo</a>
+    <hr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Portada</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Autor</th>
+                <th scope="col">ISBN</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var libro in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="~/portadas/@libro.portada" class="rounded" height="60" width="60" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => libro.titulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => libro.autores.nombre)
+                        @Html.DisplayFor(modelItem => libro.autores.aPaterno)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => libro.ISBN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => libro.precio) MXN
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => libro.stock)
+                    </td>
+                    <td>
+                        <a class="btn btn-info">Actualizar</a>
+                        <a class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @{
+        var activos = ViewBag.Activos;
+        var inactivos = ViewBag.Inactivos;
+    }
+    <a class="btn btn-success">
+        Activos <span class="badge badge-light">@activos</span>
+        <span class="sr-only">Libros Activos</span>
+    </a>
+    <a class="btn btn-secondary">
+        Inactivos <span class="badge badge-secondary">@inactivos</span>
+        <span class="sr-only">Libros inactivos</span>
+    </a>
+</div>

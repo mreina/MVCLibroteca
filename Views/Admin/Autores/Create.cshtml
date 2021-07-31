@@ -1,0 +1,64 @@
+﻿@model Autores
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "Autores";
+}
+
+<div class="text-center">
+    <h2 class="display-4">Nuevo Autor</h2>
+</div>
+<div>
+    @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+</div>
+<div class="container">
+    <form class="needs-validation" novalidate method="POST" asp-controller="Autores" asp-action="Add">
+        <div class="form-group">
+            <label for="inputNombre">Nombre(s): </label>
+            <input asp-for="nombre" type="text" class="form-control" id="inputNombre"
+                placeholder="Introduce tu nombre(s)" required>
+            <div class="valid-feedback">
+                Dato ingresado.
+            </div>
+            <div class="invalid-feedback">
+                El nombre es un campo obligatorio.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputPaterno">Apellido Paterno: </label>
+            <input type="text" asp-for="aPaterno" class="form-control" id="inputPaterno"
+                placeholder="Introduce tu apellido paterno" required>
+            <div class="valid-feedback">
+                Dato ingresado.
+            </div>
+            <div class="invalid-feedback">
+                El apellido paterno es un campo obligatorio.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputMaterno">Apellido Materno: </label>
+            <input type="text" asp-for="aMaterno" class="form-control" id="inputMaterno"
+                placeholder="Introduce tu apellido materno">
+            <div class="valid-feedback">
+                Dato ingresado.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputNacionalidad">Nacionalidad: </label>
+            <input type="text" asp-for="nacionalidad" class="form-control" id="inputNacionalidad"
+                placeholder="Introduce tu nacionalidad" required>
+            <div class="valid-feedback">
+                Dato ingresado.
+            </div>
+            <div class="invalid-feedback">
+                La nacionalidad es un campo obligatorio.
+            </div>
+        </div>
+
+        <hr>
+        <button type="submit" class="btn btn-primary">Registrar</Button>
+        <button class="btn btn-danger" asp-controller="Autores" asp-action="List">Cancelar</button>
+    </form>
+</div>

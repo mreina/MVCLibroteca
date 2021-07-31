@@ -1,0 +1,94 @@
+@model IEnumerable<Autores>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "lista Autores";
+}
+
+<div class="text-center">
+    <h2> Autores Activos</h2>
+</div>
+<a class="btn btn-primary" asp-controller="Autores" asp-action="Create">Nuevo</a>
+<hr>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"> Nombre </th>
+                <th scope="col"> Apellido Paterno </th>
+                <th scope="col"> Apellido Materno </th>
+                <th scope="col"> Nacionalidad </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var autor in Model)
+            {
+                <tr>
+                    <td> @Html.DisplayFor(modelItem => autor.nombre)</td>
+                    <td> @Html.DisplayFor(modelItem => autor.aPaterno)</td>
+                    <td> @Html.DisplayFor(modelItem => autor.aMaterno)</td>
+                    <td> @Html.DisplayFor(modelItem => autor.nacionalidad)</td>
+                    <td>
+                        <a class="btn btn-info" asp-controller="Autores" asp-action="update" asp-route-id="@autor.idAutor">
+                            Modificar </a>
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalBaja"
+                        data-id="@autor.idAutor" data-nombre="@autor.nombre" data-ap="@autor.aPaterno">
+                            Baja </button>
+                        <a class="btn btn-danger" asp-controller="Autores" asp-action="Delete"
+                        asp-route-id="@autor.idAutor"> Eliminar </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="modal fade" id="modalBaja" tabindex="-1" aria-hidden="true" aria-labelledby="modalBajaLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalBajaLabel">
+                        <input type="text" id="autorNombre" value="" disabled>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <strong class="alert alert-danger">¿Estás seguro de darlo de baja temporal?</strong>
+                    <hr>
+                    <p>Esta acción quitará al autor de la vista principal, y dejará de estar disponible,hasta
+                        que se vuelva a activar.</p>
+                </div>
+                <div class="modal-footer">
+                    <form>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <a id="btnBaja" class="btn btn-primary">Confirmar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @{
+        var activos = ViewBag.Activos;
+        var inactivos = ViewBag.Inactivos;
+    }
+    <a class="btn btn-success" asp-controller="Autores" asp-action="List">
+        Activos <span class="badge badge-light">@activos</span>
+        <span class="sr-only">Autores activos</span>
+    </a>
+    <a class="btn btn-secondary" asp-controller="Autores" asp-action="ListInactive">
+        Inactivos <span class="badge badge-light">@inactivos</span>
+        <span class="sr-only">Autores inactivos</span>
+    </a>
+
+</div>
+@section scripts{
+<script>
+    $('#modalBaja').on("show.bs.modal", function (event) {
+        var button = $(event.relatedTarget);
+        //Concatenar para mostrar el nombre completo
+        var nombre = button.data('nombre') + " " + button.data('ap');
+        var id = button.data('id');
+
+        var modal = $(this);
+        modal.find('.modal-title input').val(nombre);
+        $('#btnBaja').attr('href', '/Autores/Baja/' + id);
+    })
+</script>
+}

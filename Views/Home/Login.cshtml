@@ -1,0 +1,54 @@
+﻿@model Usuarios
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Inicio de sesión";
+}
+<!--Inicio De Alertar-->
+<div class="mx-auto">
+    <!--Inicio De Alertar-->
+    <div>
+        @if (!ViewData.ModelState.IsValid)
+        {
+
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>ERROR:</strong> @Html.ValidationMessage("Errorlogin")
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-5 mx-auto">
+        <div id="first">
+            <div class="myform form ">
+                <div class="logo mb-3">
+                    <div class="col-md-12 text-center">
+                        <img class="mb-4" src="~/imagenes/logo.png" alt="" width="120" height="120">
+                        <h1>Inicio de sesión</h1>
+                    </div>
+                </div>
+                <form method="post" name="login" asp-controller="Home" asp-action="Login">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Correo Electrónico:</label>
+                        <input type="email" asp-for="correo" name="correo" class="form-control" id="email"
+                            aria-describedby="emailHelp" placeholder="Ingresa el correo">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Contraseña</label>
+                        <input type="password" asp-for="password" name="password" id="contrasenia" class="form-control"
+                            aria-describedby="emailHelp" placeholder="Ingresa la contraseña">
+                    </div>
+                    <div class="col-md-12 text-center ">
+                        <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Entrar</button>
+                    </div>
+                    <div class="col-md-12 ">
+                        <div class="login-or">
+                            <hr class="hr-or">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

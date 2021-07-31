@@ -1,0 +1,42 @@
+@model Autores
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "Autores";
+}
+<div class="container">
+    <h3 class="text-danger">¿Estás seguro de eliminar el siguiente Autor?</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <p>Nombre:</p>
+        </dt>
+        <dd>
+            @Html.DisplayFor(autor => autor.nombre)
+        </dd>
+        <dt>
+            <p>Apellido Paterno:</p>
+        </dt>
+        <dd>
+            @Html.DisplayFor(autor => autor.aPaterno)
+        </dd>
+        <dt>
+            <p>Apellido Materno:</p>
+        </dt>
+        <dd>
+            @Html.DisplayFor(autor => autor.aMaterno)
+        </dd>
+        <dt>
+            <p>Nacionalidad:</p>
+        </dt>
+        <dd>
+            @Html.DisplayFor(autor => autor.nacionalidad)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            <a class="btn btn-primary" asp-action="List"> Regresar </a>
+        </div>
+    }
+</div>

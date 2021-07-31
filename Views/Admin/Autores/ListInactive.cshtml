@@ -1,0 +1,49 @@
+@model IEnumerable<Autores>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "lista Autores";
+}
+
+<div class="text-center">
+    <h2> Autores Inactivos</h2>
+</div>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"> Nombre </th>
+                <th scope="col"> Apellido Paterno </th>
+                <th scope="col"> Apellido Materno </th>
+                <th scope="col"> Nacionalidad </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var autor in Model)
+            {
+                <tr>
+                    <td> @Html.DisplayFor(modelItem => autor.nombre)</td>
+                    <td> @Html.DisplayFor(modelItem => autor.aPaterno)</td>
+                    <td> @Html.DisplayFor(modelItem => autor.aMaterno)</td>
+                    <td> @Html.DisplayFor(modelItem => autor.nacionalidad)</td>
+                    <td>
+                        <a class="btn btn-warning" asp-controller="Autores" asp-action="Restaurar" asp-route-id="@autor.idAutor"> Restaurar </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @{
+        var activos = ViewBag.Activos;
+        var inactivos = ViewBag.Inactivos;
+    }
+    <a class="btn btn-success" asp-controller="Autores" asp-action="List">
+        Activos <span class="badge badge-light">@activos</span>
+        <span class="sr-only">Autores activos</span>
+    </a>
+    <a class="btn btn-secondary" asp-controller="Autores" asp-action="ListInactive">
+        Inactivos <span class="badge badge-light">@inactivos</span>
+        <span class="sr-only">Autores inactivos</span>
+    </a>
+
+</div>
